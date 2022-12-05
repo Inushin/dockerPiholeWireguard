@@ -1,0 +1,8 @@
+# Stops and removes the pihole container
+docker compose rm -s -v -f pihole
+
+# Removes the pihole image
+docker rmi -f pihole/pihole
+
+# Recreates docker-compose.yaml.
+docker compose up -d

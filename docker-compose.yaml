@@ -1,0 +1,49 @@
+version: '3'
+services:
+   wireguard:
+        image: linuxserver/wireguard
+        container_name: wireguard
+        cap_add:
+                - NET_ADMIN
+                - SYS_MODULE
+        env_file:
+                - $PWD/wireguard.env
+        volumes:
+                - /root/wireguard/config:/config
+                - /lib/modules:/lib/modules
+                - /usr/src:/usr/src
+        ports:
+                - 51820:51820/udp
+        dns:
+                - 172.20.0.7
+        sysctls:
+                - net.ipv4.conf.all.src_valid_mark=1
+        restart: unless-stopped
+        networks:
+                containers:
+                        ipv4_address: 172.20.0.5
+   pihole:
+        container_name: pihole
+        image: pihole/pihole:latest
+        expose:
+                - 53
+                - 67
+                - 80
+                - 443
+        env_file:
+                - $PWD/pihole.env
+        volumes:
+                - $PWD/etc-pihole/:/etc/pihole/
+                - $PWD/etc-dnsmasq.d/:/etc/dnsmasq.d/
+        cap_add:
+                - NET_ADMIN
+        restart: unless-stopped
+        networks:
+               containers:
+                       ipv4_address: 172.20.0.7
+
+networks:
+   containers:
+        ipam:
+                config:
+                        - subnet: 172.20.0.0/24
