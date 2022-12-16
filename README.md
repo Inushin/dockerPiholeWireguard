@@ -120,4 +120,4 @@ If you find any bug or just want to give your feedback (remember the ⭐ ^^), **
 
 ## Version control 📝
 
-- [v1.0 - Current](https://github.com/Inushin/dockerPiholeWireguard/-/tree/v1.0) - Creation of the rep with the config finished - 05/12/2022
+- [v1.0 - Current](https://github.com/Inushin/dockerPiholeWireguard/tree/v1.0) - Creation of the rep with the config finished - 05/12/2022
